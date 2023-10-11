@@ -11,6 +11,7 @@ public:
     // CPU should execute a program
     void execute();
     void read();
+    void simulate();
 };
 
 #endif

@@ -7,6 +7,15 @@
 
 using namespace std;
 
+void parseLine (string line, string& description, string& value) {
+    // Find colon position
+    size_t colonPos = line.find(':');
+
+    // Update strings accordingly
+    description = line.substr(0, colonPos);
+    value = line.substr(colonPos + 2);
+}
+
 Platform::Platform(string platformPath) {
     // Open the file
     ifstream platformFile;
@@ -60,30 +69,19 @@ void Platform::addComponent(string componentPath) {
 
     // Get type of component
     if (value == "CPU") {
-        CPU newCPU = new CPU();
+        CPU* newCPU = new CPU();
 
-        components.push_back()
-    } else if (value == "MEMORY") {
-
-    } else if (value == "DISPLAY") {
-
-    } else if (value == "BUS") {
-
-    } else if (value == "PROGRAM") {
-
-    } else {
+        // Adding to vector
+        components.push_back(newCPU);
+    } 
+    // else if (value == "MEMORY") {
+    // } else if (value == "DISPLAY") {
+    // } else if (value == "BUS") {
+    // } else if (value == "PROGRAM") {} 
+    else {
         cerr << "ERROR: Component " << value << " not supported yet" << endl;
     }
 
     // Close the file
     componentFile.close();
-}
-
-void parseLine (string line, string& description, string& value) {
-    // Find colon position
-    size_t colonPos = line.find(':');
-
-    // Update strings accordingly
-    description = line.substr(0, colonPos);
-    value = line.substr(colonPos + 2);
 }
