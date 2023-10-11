@@ -2,8 +2,12 @@
 Include used for class descritpion on the project
 */
 
+#ifndef _MAIN_HPP_
+#define _MAIN_HPP_
+
 #include <iostream>
 #include <sstream>
+
 using namespace std;
 
 typedef struct DataValue
@@ -42,6 +46,7 @@ public:
 };
 
 class BaseData: public Component{
+public:
     // BaseData should knows who has been connected to it: method? TODO
     void read();
 };
@@ -62,3 +67,5 @@ public:
     // Memory can tell the label of its source
     // Memory should knows who has been connected to it: method? TODO 
 };
+
+#endif
