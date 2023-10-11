@@ -6,16 +6,23 @@ Include used for class descritpion on the project
 #include <sstream>
 using namespace std;
 
+typedef struct DataValue
+{
+    double value;
+    bool valid;
+} DataValue;
+
 class Platform{
 public:
     Component component;
-    virtual void simulate() = 0;
-    // Platform should handle all the bindings: method? TODO  
+    void simulate();
+        // Platform should handle all the bindings: method? TODO  
 };
 
 class Component{
 public:
-    string label; 
+    string label;
+    virtual void simulate(); 
 };
 
 class Display: public Component{
