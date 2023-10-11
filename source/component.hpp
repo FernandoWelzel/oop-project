@@ -2,12 +2,14 @@
 #define _COMPONENT_HPP_
 
 #include <string>
+
 using namespace std;
 
 class Component{
 public:
     string label;
-    virtual void simulate(); 
+    
+    virtual void simulate() = 0;
 };
 
 #endif

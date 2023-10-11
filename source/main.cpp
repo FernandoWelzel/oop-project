@@ -1,16 +1,16 @@
 #include <iostream>
 
-#include <main.hpp>
+#include "platform.hpp"
 
 using namespace std;
 
 int main(int argc, char const *argv[])
 {
-    Platform myPlataform("./data/plataform.txt");
+    Platform myPlataform("../data/platform.txt");
 
-    myPlataform.build();
+    // myPlataform.build();
 
-    myPlataform.simulate();
+    // myPlataform.simulate();
     
     return 0;
 }
