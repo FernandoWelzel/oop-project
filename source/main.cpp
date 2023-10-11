@@ -1,9 +1,16 @@
 #include <iostream>
 
+#include <main.hpp>
+
 using namespace std;
 
 int main(int argc, char const *argv[])
 {
-    cout << "Hello World!!" << endl;
+    Platform myPlataform("./data/plataform.txt");
+
+    myPlataform.build();
+
+    myPlataform.simulate();
+    
     return 0;
 }
