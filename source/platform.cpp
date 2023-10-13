@@ -28,7 +28,7 @@ Platform::Platform(string platformPath) {
     }
 
     string line;
-
+    
     // Read each line from the file
     while (getline(platformFile, line)) {
         addComponent(line);
