@@ -6,10 +6,15 @@
 using namespace std;
 
 class Component{
-public:
+protected:
     string label;
-    
+    string program;
+
+public:
     virtual void simulate() = 0;
+    
+    string getLabel();
+    string getProgram();
 };
 
 #endif

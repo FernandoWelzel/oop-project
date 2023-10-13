@@ -4,17 +4,9 @@
 
 #include "platform.hpp"
 #include "cpu.hpp"
+#include "parse.hpp"
 
 using namespace std;
-
-void parseLine (string line, string& description, string& value) {
-    // Find colon position
-    size_t colonPos = line.find(':');
-
-    // Update strings accordingly
-    description = line.substr(0, colonPos);
-    value = line.substr(colonPos + 2);
-}
 
 Platform::Platform(string platformPath) {
     // Open the file
@@ -28,7 +20,7 @@ Platform::Platform(string platformPath) {
     }
 
     string line;
-    
+
     // Read each line from the file
     while (getline(platformFile, line)) {
         addComponent(line);
@@ -69,7 +61,7 @@ void Platform::addComponent(string componentPath) {
 
     // Get type of component
     if (value == "CPU") {
-        CPU* newCPU = new CPU();
+        CPU* newCPU = new CPU(componentPath);
 
         // Adding to vector
         components.push_back(newCPU);

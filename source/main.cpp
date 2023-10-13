@@ -12,7 +12,9 @@ int main(int argc, char const *argv[])
         cerr << "Wrong number of arguments - Received: " << argc << " Expecting: 1";
     }
 
-    Platform myPlataform(argv[1]);
+    Platform myPlatform(argv[1]);
+
+    cout << "Label of first component is: "  << myPlatform.components[0]->getLabel() << endl;
 
     // myPlataform.build();
 
