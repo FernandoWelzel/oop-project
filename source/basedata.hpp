@@ -4,6 +4,8 @@
 
 class BaseData: public Component{
     // BaseData should knows who has been connected to it: method? TODO
+protected:
+    string source;
     void read();
 };
 

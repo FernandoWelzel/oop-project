@@ -1,13 +1,25 @@
 #ifndef _DISPLAY_HPP_
 #define _DISPLAY_HPP_
+
 #include "component.hpp"
 
 class Display: public Component{
+public:
+    // Constructor
+    Display(string displayPath);
+    // Destructor
+    ~Display();
+
 private: 
     int refresh_rate;
     string source;
     // Display should knows who has been connected to it: method? TODO
-    Display(string displayPath);
+    void simulate(){
+        cout << "Temporary message - Display simulation method" << endl;
+    }
 };
+
+
+
 
 #endif

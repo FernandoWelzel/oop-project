@@ -6,6 +6,8 @@
 #include "cpu.hpp"
 #include "parse.hpp"
 #include "memory.hpp"
+#include "display.hpp"
+#include "bus.hpp"
 
 using namespace std;
 
@@ -73,10 +75,19 @@ void Platform::addComponent(string componentPath) {
         // Adding to vector
         components.push_back(newMemory);
     }
+    else if (value == "DISPLAY") {
+        Display* newDisplay = new Display(componentPath);
 
-    // } else if (value == "DISPLAY") {
-    // } else if (value == "BUS") {
-    // } else if (value == "PROGRAM") {} 
+        // Adding to vector
+        components.push_back(newDisplay);
+    } 
+    else if (value == "BUS") {
+        Bus* newBus = new Bus(componentPath);
+
+        // Adding to a vector
+        components.push_back(newBus);
+    } 
+    // else if (value == "PROGRAM") {} 
     else {
         cerr << "ERROR: Component " << value << " not supported yet" << endl;
     }

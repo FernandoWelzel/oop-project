@@ -4,14 +4,14 @@
 #include "component.hpp"
 #include "basedata.hpp"
 
-class Memory: public Component{ // Circular Buffer
+class Memory: public BaseData{ // Circular Buffer
 public:
     int size;
     int access_time;
     string source;
     void store();
     void simulate(){
-        cout << "Test" << endl;
+        cout << "Temporary message - memory simulation method" << endl;
     };
     
     // Constructor
@@ -19,7 +19,5 @@ public:
     // Destructor
     ~Memory();
 };
-
-// Memory::~Memory(){};
 
 #endif
