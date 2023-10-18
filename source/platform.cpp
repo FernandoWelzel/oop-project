@@ -5,6 +5,7 @@
 #include "platform.hpp"
 #include "cpu.hpp"
 #include "parse.hpp"
+#include "memory.hpp"
 
 using namespace std;
 
@@ -66,7 +67,13 @@ void Platform::addComponent(string componentPath) {
         // Adding to vector
         components.push_back(newCPU);
     } 
-    // else if (value == "MEMORY") {
+    else if (value == "MEMORY") {
+        Memory* newMemory = new Memory(componentPath);
+        
+        // Adding to vector
+        components.push_back(newMemory);
+    }
+
     // } else if (value == "DISPLAY") {
     // } else if (value == "BUS") {
     // } else if (value == "PROGRAM") {} 

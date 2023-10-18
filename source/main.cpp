@@ -13,8 +13,12 @@ int main(int argc, char const *argv[])
     }
 
     Platform myPlatform(argv[1]);
-
+    // Memory Parser testing
     cout << "Label of first component is: "  << myPlatform.components[0]->getLabel() << endl;
+    // CPU Parser testing
+    // cout << "Label of first component is: "  << myPlatform.components[0]->getLabel() << endl;
+
+    // Display Parser testing
 
     // myPlataform.build();
 

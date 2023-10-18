@@ -1,14 +1,25 @@
-#ifndef _BUS_HPP_
-#define _BUS_HPP_
+#ifndef _MEMORY_HPP_
+#define _MEMORY_HPP_
+
+#include "component.hpp"
 #include "basedata.hpp"
 
-class Memory: public BaseData{ // Circular Buffer
+class Memory: public Component{ // Circular Buffer
 public:
     int size;
     int access_time;
+    string source;
     void store();
-    // Memory can tell the label of its source
-    // Memory should knows who has been connected to it: method? TODO 
+    void simulate(){
+        cout << "Test" << endl;
+    };
+    
+    // Constructor
+    Memory(string memoryPath);
+    // Destructor
+    ~Memory();
 };
+
+// Memory::~Memory(){};
 
 #endif

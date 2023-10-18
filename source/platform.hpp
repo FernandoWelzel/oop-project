@@ -6,6 +6,7 @@
 
 #include "component.hpp"
 #include "cpu.hpp"
+#include "memory.hpp"
 
 using namespace std;
 
