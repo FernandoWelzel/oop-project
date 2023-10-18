@@ -14,7 +14,7 @@ public:
     CPU(string cpuPath);
 
     // CPU should execute a program
-    void execute();
+    float execute(string programPath);
     void read();
     void simulate();
 };
