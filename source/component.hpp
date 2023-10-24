@@ -12,6 +12,7 @@ protected:
 
 public:
     virtual void simulate() = 0;
+    virtual void read() = 0;
     
     string getLabel();
     string getProgram();
