@@ -3,6 +3,10 @@
 
 #include "component.hpp"
 
+#include <iostream>
+
+using namespace std;
+
 class CPU: public Component{
 private:
     int cores;
@@ -21,10 +25,7 @@ public:
 
     void simulate();
 
-    void read(){
-        // TODO
-        cout << "Temporary message - cpu read method" << endl;
-    };
+    void read();
 };
 
 #endif

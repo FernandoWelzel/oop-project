@@ -48,6 +48,11 @@ void CPU::simulate() {
     return;
 }
 
+void CPU::read() {
+    return;
+}
+
+
 float CPU::execute(string programPath){ // Return Type to be optimized according to values of operation
 // Open the file
     ifstream programFile;

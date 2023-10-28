@@ -3,6 +3,10 @@
 
 #include "component.hpp"
 
+#include <iostream>
+
+using namespace std;
+
 class Display: public Component{
 public:
     // Constructor

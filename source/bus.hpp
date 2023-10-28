@@ -3,6 +3,10 @@
 
 #include "component.hpp"
 
+#include <iostream>
+
+using namespace std;
+
 class Bus: public Component {
 public:
     int width;

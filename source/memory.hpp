@@ -3,6 +3,10 @@
 
 #include "component.hpp"
 
+#include <iostream>
+
+using namespace std;
+
 class Memory: public Component { // Circular Buffer
 public:
     int size;
