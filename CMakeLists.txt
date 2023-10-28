@@ -11,9 +11,12 @@ add_executable(main ./source/main.cpp ./source/platform.cpp ./source/parse.cpp .
 
 # Enabling unit testing
 include(GoogleTest)
-add_executable(BuildTest ./test/unit/build.cpp)
-gtest_add_tests(TARGET      BuildTest
+
+add_executable(parseTest ./test/unit/parseTest.cpp)
+
+gtest_add_tests(TARGET      parseTest
                 TEST_SUFFIX .noArgs
                 TEST_LIST   noArgsTests
 )
-set_tests_properties(${noArgsTests}   PROPERTIES TIMEOUT 10)
+
+set_tests_properties(${noArgsTests} PROPERTIES TIMEOUT 10)
