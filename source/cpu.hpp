@@ -13,10 +13,18 @@ public:
     // Constructor
     CPU(string cpuPath);
 
+    // Destructor
+    ~CPU();
+
     // CPU should execute a program
     float execute(string programPath);
-    void read();
+
     void simulate();
+
+    void read(){
+        // TODO
+        cout << "Temporary message - cpu read method" << endl;
+    };
 };
 
 #endif

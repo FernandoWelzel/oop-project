@@ -1,18 +1,25 @@
 #ifndef _BUS_HPP_
 #define _BUS_HPP_
-#include "component.hpp"
-#include "basedata.hpp"
 
-class Bus: public BaseData{
+#include "component.hpp"
+
+class Bus: public Component {
 public:
     int width;
     string source; 
     int counter;
-    bool status; // TRUE == Ready, FALSE == pending  
+    bool status; // TRUE == Ready, FALSE == pending
+
     void simulate(){
-        cout << "simulation operation on Bus" << endl; // TODO - find a way to solve this nonsense 
+        // TODO
+        cout << "Temporary message - memory simulation method" << endl;
     };
-    void read(){};
+
+    void read(){
+        // TODO
+        cout << "Temporary message - memory read method" << endl;
+    };
+    
     // Constructor
     Bus(string busPath);
     // Destructor

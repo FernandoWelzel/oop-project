@@ -17,6 +17,9 @@ private:
     void simulate(){
         cout << "Temporary message - Display simulation method" << endl;
     }
+    void read(){
+        cout << "Temporary message - Display read method" << endl;
+    }
 };
 
 
