@@ -25,3 +25,19 @@ The executable recieves one parameter, this being the path to the platform confi
 ```sh
 ./build/main ./data/platform.txt
 ```
+
+## Tests
+
+This project uses the [GoogleTest](https://github.com/google/googletest) framework. There is no need to install it own your machine as it is fetched during the compilation process with Cmake. To to run the tests run the following list of commands:  
+
+```sh
+cd build
+ctest
+```
+
+To run only one test at a time, go to the build/tests where you will find all the unit test binary files. An example of execution can be seen as follows:
+
+```sh
+cd build/tests
+./parseTest
+```
