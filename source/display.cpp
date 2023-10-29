@@ -32,6 +32,7 @@ Display::Display(string displayPath){
         else{
             cerr << "ERROR: In file " << displayPath << " attribute " << description << " not implemented " << endl;
         }
-        displayFile.close();
     }
+
+    displayFile.close();
 }

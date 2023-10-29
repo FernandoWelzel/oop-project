@@ -8,12 +8,11 @@
 using namespace std;
 
 class CPU: public Component{
-private:
+public:
     int cores;
     int frequency;
     int reg;
 
-public:
     // Constructor
     CPU(string cpuPath);
 
