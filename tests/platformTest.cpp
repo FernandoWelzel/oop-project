@@ -72,6 +72,45 @@ TEST(platformTest, constructorTest)
     ASSERT_TRUE(myDisplayP->source == "DRAM 2");
 }
 
+// Create platform - Build test
+// Check if all components are binded correctly
+TEST(platformTest, buildTest)
+{
+    Platform myPlatform("data/platform.txt");
+
+    myPlatform.build();
+
+    // Get first component - DRAM 1
+    Memory *myMemoryP =  dynamic_cast<Memory*>(myPlatform.components[0]);
+    
+    // Assert values of DRAM 1
+    ASSERT_TRUE(myMemoryP->sourceP->getLabel() == "My bus 1");
+    
+    // Get second component - DRAM 2
+    myMemoryP = dynamic_cast<Memory*>(myPlatform.components[1]);
+    
+    // Assert label from each component in order
+    ASSERT_TRUE(myMemoryP->sourceP->getLabel() == "Auxiliary bus");
+
+    // Get third component - My bus 1
+    Bus *myBusP =  dynamic_cast<Bus*>(myPlatform.components[2]);
+    
+    // Assert values of My bus 1
+    ASSERT_TRUE(myBusP->sourceP->getLabel() == "Main processing unit");
+
+    // Get fourth component - Auxiliary bus
+    myBusP =  dynamic_cast<Bus*>(myPlatform.components[3]);
+    
+    // Assert values of Auxiliary bus
+    ASSERT_TRUE(myBusP->sourceP->getLabel() == "Coproc");
+
+    // Get seventh component - Display
+    Display *myDisplayP =  dynamic_cast<Display*>(myPlatform.components[6]);
+    
+    // Assert values of Main processing unit -- TODO: Check if program is correctly loaded
+    ASSERT_TRUE(myDisplayP->sourceP->getLabel() == "DRAM 2");
+}
+
 // Runs all TEST functions declared at this file
 int main(int argc, char** argv)
 {
