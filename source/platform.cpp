@@ -95,3 +95,79 @@ void Platform::addComponent(string componentPath) {
     // Close the file
     componentFile.close();
 }
+
+// Go thought components list and binds components together
+void Platform::build() {
+    // Checks if list is not empty
+    if(components.size() <= 0) {
+        cerr << "ERROR: Trying to build an empty platform" << endl;
+        return;
+    }
+
+    // Creating pointers for each type
+    Component *componentP;
+
+    Memory *memoryP;
+    Bus *busP;
+    Display *displayP;
+    
+    for(int i = 0; i < components.size(); i++) {
+        // Get component from array
+        componentP = components[i];
+
+        // Switch type
+        switch (componentP->type)
+        {
+        case MEMORY_T:
+            memoryP = dynamic_cast<Memory*>(componentP);
+
+            // Searches for source string and storest component pointer in sourceP
+            findLabel(memoryP->source, memoryP->sourceP);
+            
+            break;
+        
+        case BUS_T:
+            busP = dynamic_cast<Bus*>(componentP);
+
+            // Searches for source string and storest component pointer in sourceP
+            findLabel(busP->source, busP->sourceP);
+
+            break;
+        
+        case DISPLAY_T:
+            displayP = dynamic_cast<Display*>(componentP);
+
+            // Searches for source string and storest component pointer in sourceP
+            findLabel(displayP->source, displayP->sourceP);
+            
+            break;
+        
+        case CPU_T: // No source to bind to
+            break;
+        
+        default:
+            cerr << "ERROR: Unknown component type" << endl;
+            break;
+        }
+    }
+}
+
+// Go thought components list and returns component with correct label
+int Platform::findLabel(string label, Component* &componentP) {
+    // Checks if list is not empty
+    if(components.size() <= 0) {
+        cerr << "ERROR: Trying to find label in empty platform" << endl;
+        return 1;
+    }
+
+    // Go thought array trying to find label
+    for(int i = 0; i < components.size(); i++) {
+        if(components[i]->getLabel() == label) {
+            componentP = components[i];
+            return 0;
+        }
+    }
+
+    // Return if not in list
+    return 1;
+}

@@ -13,6 +13,8 @@ public:
     
     string source;
 
+    Component *sourceP;
+
     // Constructor
     Display(string displayPath);
     // Destructor

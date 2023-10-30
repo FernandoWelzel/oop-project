@@ -17,6 +17,9 @@ Display::Display(string displayPath){
 
     // Getting line
     getline(displayFile, line);
+
+    // Defining component type
+    this->type = DISPLAY_T;
     
     while(getline(displayFile, line)) {
         // save description and value of line

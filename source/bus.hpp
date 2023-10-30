@@ -10,10 +10,14 @@ using namespace std;
 class Bus: public Component {
 public:
     int width;
-    string source; 
     int counter;
+
     bool status; // TRUE == Ready, FALSE == pending
 
+    string source;
+
+    Component *sourceP;
+ 
     void simulate(){
         // TODO
         cout << "Temporary message - memory simulation method" << endl;

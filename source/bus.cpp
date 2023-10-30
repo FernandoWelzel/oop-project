@@ -17,6 +17,9 @@ Bus::Bus(string busPath){
 
     // Getting line
     getline(busFile, line);
+
+    // Defining component type
+    this->type = BUS_T;
     
     while(getline(busFile, line)) {
         // save description and value of line

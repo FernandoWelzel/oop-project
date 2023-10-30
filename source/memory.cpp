@@ -17,6 +17,9 @@ Memory::Memory(string memoryPath){
 
     // Getting line
     getline(memoryFile, line);
+
+    // Defining component type
+    this->type = MEMORY_T;
     
     while(getline(memoryFile, line)) {
         // save description and value of line

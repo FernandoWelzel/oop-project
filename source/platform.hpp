@@ -24,6 +24,8 @@ public:
     void simulate();
 
     void addComponent(string componentPath);
+
+    int findLabel(string label, Component* &componentP);
 };
 
 #endif

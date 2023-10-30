@@ -18,6 +18,9 @@ CPU::CPU(string cpuPath) {
     // Getting unused TYPE line
     getline(cpuFile, line);
 
+    // Defining component type
+    this->type = CPU_T;
+
     while(getline(cpuFile, line)) {
         // Store description and value from line
         parseLine(line, description, value);

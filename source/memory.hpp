@@ -11,7 +11,11 @@ class Memory: public Component { // Circular Buffer
 public:
     int size;
     int access_time;
+    
     string source;
+    
+    Component *sourceP;
+
     void store();
     
     void simulate(){
