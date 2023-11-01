@@ -27,3 +27,8 @@ add_test(platformTest platformTest)
 add_executable(CPUTest CPUTest.cpp)
 target_link_libraries(CPUTest PRIVATE gtest_main sourceLibrary)
 add_test(CPUTest CPUTest)
+
+# Queue test
+add_executable(queueTest queueTest.cpp)
+target_link_libraries(queueTest PRIVATE gtest_main sourceLibrary)
+add_test(queueTest queueTest)

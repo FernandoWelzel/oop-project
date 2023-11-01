@@ -6,6 +6,7 @@ add_library(sourceLibrary
     memory.cpp
     display.cpp
     bus.cpp
+    queue.cpp
 )
 
 target_include_directories(sourceLibrary PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
