@@ -14,7 +14,7 @@ void parseLine (string line, string& description, string& value) {
     value = line.substr(colonPos + 2);
 }
 
-void parseExecution(string line, string& operation, float& operand_A, float&operand_B){
+void parseExecution(string line, string& operation, float& operand_A, float& operand_B){
     // Find end of command
     size_t spacePos = line.find(' ', 0);
     // Operation to be made

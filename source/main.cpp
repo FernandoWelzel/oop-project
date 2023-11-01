@@ -14,7 +14,8 @@ int main(int argc, char const *argv[])
     // Constructing platform from file
     Platform myPlatform(argv[1]);
     
-    // myPlataform.build();
+    // Binding components of platform
+    myPlataform.build();
 
     // myPlataform.simulate();
     

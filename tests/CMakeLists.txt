@@ -22,3 +22,8 @@ add_test(parseTest parseTest)
 add_executable(platformTest platformTest.cpp)
 target_link_libraries(platformTest PRIVATE gtest_main sourceLibrary)
 add_test(platformTest platformTest)
+
+# CPU test
+add_executable(CPUTest CPUTest.cpp)
+target_link_libraries(CPUTest PRIVATE gtest_main sourceLibrary)
+add_test(CPUTest CPUTest)

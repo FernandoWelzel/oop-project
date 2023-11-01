@@ -36,7 +36,22 @@ CPU::CPU(string cpuPath) {
             this->frequency = stoi(value);
         }
         else if(description == "PROGRAM") {
-            this->program = value; 
+            ifstream programFile;
+            programFile.open(value);
+
+            string instructionLine;
+
+            while(getline(programFile, instructionLine)) {
+                // Creating new instuction
+                Instruction *newInstruction = new Instruction(instructionLine);
+
+                // Adding instruction to program
+                program.push_back(*newInstruction); 
+            }
+
+            programCounter = program.begin();
+
+            programFile.close();
         }
         else {
             cerr << "ERROR: In file " << cpuPath << " attribute " << description << " not implemented yet" << endl; 
@@ -48,47 +63,63 @@ CPU::CPU(string cpuPath) {
 }
 
 void CPU::simulate() {
-    return;
+    // Execute each instruction
+    for(int i = 0; i < frequency; i++) {
+        reg = execute();
+    }
 }
 
 void CPU::read() {
     return;
 }
 
+float CPU::execute(){ // Return Type to be optimized according to values of operation
+    float result = programCounter->execute();
 
-float CPU::execute(string programPath){ // Return Type to be optimized according to values of operation
-// Open the file
-    ifstream programFile;
-    programFile.open(programPath);
-
-    // Iteration variables
-    string line, operation;
-    float operand_A, operand_B;
-    // Getting unused TYPE line
-    getline(programFile, line);
-
-    // Store operation and operands from line
-    parseExecution(line, operation, operand_A, operand_B);
-
-    // Executing operation
-    if(operation == "ADD") {
-        return operand_A + operand_B;
-    }
-    else if(operation == "SUB"){
-        return operand_A - operand_B; 
-    }
-    else if(operation == "MUL") {
-        return operand_A * operand_B;
-    }
-    else if(operation == "DIV") {
-        return operand_A / operand_B; 
-    }
-    else {
-        cerr << "ERROR: In file " << programPath << " operation " << operation << " not implemented " << endl; 
+    // Update program counter if not in the end
+    if(programCounter < program.end()) {
+        ++programCounter;
     }
 
-    // Close file
-    programFile.close();
-    return 0;
-    // TODO - find a way to delete line from program file or to be able to loop until all instructions have passed.
+    return result; 
+}
+
+Instruction::Instruction(string instructionLine){
+    // Find operation separation space
+    size_t spacePos = instructionLine.find(' ', 4);
+
+    // Getting instruction from the first charatecter
+    type = (instructionType)instructionLine[0];
+
+    operandA = stof(instructionLine.substr(4, spacePos));
+    operandB = stof(instructionLine.substr(spacePos, instructionLine.back()));
+}
+
+float Instruction::execute() {
+    float result;
+    
+    switch (type)
+    {
+    case ADD_INST:
+        result = operandA + operandB;
+        break;
+    
+    case SUB_INST:
+        result = operandA - operandB;
+        break;
+    
+    case MUL_INST:
+        result = operandA * operandB;
+        break;
+    
+    case DIV_INST:
+        result = operandA / operandB;
+        break;
+    
+    default:
+        cerr << "ERROR: Operation " << type << " not implemented" << endl;
+        break;
+    }
+
+    return result;
 }
