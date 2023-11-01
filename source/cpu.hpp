@@ -49,7 +49,7 @@ public:
     // CPU should execute a program
     float execute();
 
-    void simulate();
+    int simulate();
 
     void read();
 };

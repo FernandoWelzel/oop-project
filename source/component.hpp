@@ -15,7 +15,8 @@ protected:
 public:
     componentType type;
 
-    virtual void simulate() = 0;
+    virtual int simulate() = 0;
+    
     virtual void read() = 0;
     
     string getLabel();

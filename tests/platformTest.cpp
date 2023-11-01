@@ -111,6 +111,16 @@ TEST(platformTest, buildTest)
     ASSERT_TRUE(myDisplayP->sourceP->getLabel() == "DRAM 2");
 }
 
+// Create platform - Simulate test
+TEST(platformTest, simulateTest)
+{
+    Platform myPlatform("data/platform.txt");
+
+    myPlatform.build();
+
+    // ASSERT_FALSE(myPlatform.simulate());
+}
+
 // Runs all TEST functions declared at this file
 int main(int argc, char** argv)
 {

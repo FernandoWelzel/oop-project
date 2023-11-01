@@ -62,11 +62,13 @@ CPU::CPU(string cpuPath) {
     cpuFile.close();
 }
 
-void CPU::simulate() {
+int CPU::simulate() {
     // Execute each instruction
     for(int i = 0; i < frequency; i++) {
         reg = execute();
     }
+
+    return 0;
 }
 
 void CPU::read() {

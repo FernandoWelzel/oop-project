@@ -21,7 +21,7 @@ public:
 
     void build(); 
 
-    void simulate();
+    int simulate();
 
     void addComponent(string componentPath);
 

@@ -21,8 +21,10 @@ public:
     ~Display();
 
     // Display should knows who has been connected to it: method? TODO
-    void simulate(){
+    int simulate(){
         cout << "Temporary message - Display simulation method" << endl;
+        
+        return 0;
     }
     
     void read(){

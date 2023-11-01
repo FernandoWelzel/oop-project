@@ -171,3 +171,18 @@ int Platform::findLabel(string label, Component* &componentP) {
     // Return if not in list
     return 1;
 }
+
+// Simulates all components in the platform
+int Platform::simulate() {
+    // Runs platform 
+    while(1) {
+        vector<Component*>::iterator it;
+
+        // Iterates simulating each component
+        for(it = components.begin(); it != components.end(); ++it) {
+            if((*it)->simulate()) return 1;
+        }
+    }
+
+    return 0;
+}

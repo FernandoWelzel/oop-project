@@ -18,8 +18,10 @@ public:
 
     void store();
     
-    void simulate(){
+    int simulate(){
         cout << "Temporary message - memory simulation method" << endl;
+
+        return 0;
     };
 
     void read(){

@@ -18,9 +18,10 @@ public:
 
     Component *sourceP;
  
-    void simulate(){
+    int simulate(){
         // TODO
         cout << "Temporary message - memory simulation method" << endl;
+        return 1;
     };
 
     void read(){

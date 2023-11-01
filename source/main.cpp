@@ -17,7 +17,8 @@ int main(int argc, char const *argv[])
     // Binding components of platform
     myPlataform.build();
 
-    // myPlataform.simulate();
+    // Simulate all components
+    myPlataform.simulate();
     
     return 0;
 }
