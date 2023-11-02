@@ -11,4 +11,5 @@ enable_testing()
 
 # Adding directories
 add_subdirectory(source)
+add_subdirectory(include)
 add_subdirectory(tests)

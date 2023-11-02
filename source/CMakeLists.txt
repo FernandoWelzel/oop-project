@@ -8,5 +8,3 @@ add_library(sourceLibrary
     bus.cpp
     queue.cpp
 )
-
-target_include_directories(sourceLibrary PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
