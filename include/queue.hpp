@@ -4,13 +4,14 @@
 using namespace std;
 
 template<typename T> class Queue {
-private:
+public:
     size_t size;
     
     int front;
     int rear;
 
-public:
+    bool full;
+
     T* data;
     
     // Constructor
@@ -22,6 +23,8 @@ public:
 
         front = 0;
         rear = 0;
+        
+        full = 0;
     };
 
     // Destructor
@@ -36,29 +39,38 @@ public:
         // Writes value on front
         data[front] = value;
 
-        // Increments rear in case of overwriting
-        if(front == rear)  {
-            rear = (rear + 1)%(size);
-        }
-        
         // Increments pointer wrapping to the end
         front = (front + 1)%(size);
+
+        // Checks colision with the beggining of queue
+        if(front == rear) {
+            full = true;
+        } else if(full)  {
+            rear = (rear + 1)%(size);
+        }
     };
     
     T deQueue(){
         // Checks for not dequeing an empty list
-        if(front == 0 && rear == 0)  {
+        if(isEmpty())  {
             cerr << "ERROR: Dequeing an empty list" << endl;
             
-            return data[rear];  
+            return 0;  
         }
 
         T result = data[rear];
 
         // Increments rear wrapping to the end
         rear = (rear + 1)%(size);
+
+        // If dequeued, queue is not full
+        full = 0;
         
         return result;
+    };
+
+    bool isEmpty(){
+        return front == rear && !full;
     };
 };
 

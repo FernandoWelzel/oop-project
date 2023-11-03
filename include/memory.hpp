@@ -3,6 +3,8 @@
 
 #include "component.hpp"
 
+#include "queue.hpp"
+
 #include <iostream>
 
 using namespace std;
@@ -10,28 +12,25 @@ using namespace std;
 class Memory: public Component { // Circular Buffer
 public:
     int size;
-    int access_time;
-    
+    int accessTime;
+
+    int accessCounter;
+
     string source;
     
     Component *sourceP;
 
+    Queue<double> *memory;
+
     void store();
     
-    int simulate(){
-        cout << "Temporary message - memory simulation method" << endl;
+    int simulate();
 
-        return 0;
-    };
-
-    DataValue read(){
-        cout << "Temporary message - memory read method" << endl;
-    
-        return DataValue(0, false);
-    };
+    DataValue read();
     
     // Constructor
     Memory(string memoryPath);
+    
     // Destructor
     ~Memory();
 };

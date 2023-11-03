@@ -32,3 +32,8 @@ add_test(CPUTest CPUTest)
 add_executable(queueTest queueTest.cpp)
 target_link_libraries(queueTest PRIVATE gtest_main sourceLibrary)
 add_test(queueTest queueTest)
+
+# Memory test
+add_executable(memoryTest memoryTest.cpp)
+target_link_libraries(memoryTest PRIVATE gtest_main sourceLibrary)
+add_test(memoryTest memoryTest)

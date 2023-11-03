@@ -20,7 +20,7 @@ TEST(platformTest, constructorTest)
     // Assert values of DRAM 1
     ASSERT_TRUE(myMemoryP->getLabel() == "DRAM 1");
     ASSERT_TRUE(myMemoryP->size == 32);
-    ASSERT_TRUE(myMemoryP->access_time == 2);
+    ASSERT_TRUE(myMemoryP->accessTime == 2);
     ASSERT_TRUE(myMemoryP->source == "My bus 1");
     
     // Get second component - DRAM 2
@@ -29,7 +29,7 @@ TEST(platformTest, constructorTest)
     // Assert label from each component in order
     ASSERT_TRUE(myMemoryP->getLabel() == "DRAM 2");
     ASSERT_TRUE(myMemoryP->size == 128);
-    ASSERT_TRUE(myMemoryP->access_time == 4);
+    ASSERT_TRUE(myMemoryP->accessTime == 4);
     ASSERT_TRUE(myMemoryP->source == "Auxiliary bus");
 
     // Get third component - My bus 1
