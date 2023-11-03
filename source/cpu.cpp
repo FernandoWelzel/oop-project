@@ -62,21 +62,26 @@ CPU::CPU(string cpuPath) {
     cpuFile.close();
 }
 
+// Executes "frequency" instructions and writes values to FIFO
 int CPU::simulate() {
     // Execute each instruction
     for(int i = 0; i < frequency; i++) {
-        reg = execute();
+        writeReg(execute());
     }
 
     return 0;
 }
 
+// Reads one of the values of the FIFO
 void CPU::read() {
+    double value = readReg();
+    
     return;
 }
 
-float CPU::execute(){ // Return Type to be optimized according to values of operation
-    float result = programCounter->execute();
+// Executes one instruction and increments program counter
+double CPU::execute(){
+    double result = programCounter->execute();
 
     // Update program counter if not in the end
     if(programCounter < program.end()) {
@@ -84,6 +89,32 @@ float CPU::execute(){ // Return Type to be optimized according to values of oper
     }
 
     return result; 
+}
+
+// Writes value to internal FIFO register
+void CPU::writeReg(double value){
+    reg.push_back(value);
+}
+
+// Reads value from internal FIFO register
+double CPU::readReg(){
+    if(regIsEmpty()) {
+        cerr << "ERROR: Trying to read from an empty FIFO" << endl;
+        
+        return 1;
+    }
+    
+    double front = reg.front();
+
+    // Removes first element
+    reg.pop_front();
+
+    return front;
+}
+
+// Returns 1 is FIFO is empty
+int CPU::regIsEmpty() {
+    return reg.size() == 0;
 }
 
 Instruction::Instruction(string instructionLine){
@@ -97,8 +128,8 @@ Instruction::Instruction(string instructionLine){
     operandB = stof(instructionLine.substr(spacePos, instructionLine.back()));
 }
 
-float Instruction::execute() {
-    float result;
+double Instruction::execute() {
+    double result;
     
     switch (type)
     {

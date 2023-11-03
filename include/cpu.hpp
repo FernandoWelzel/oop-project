@@ -6,6 +6,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <list>
 
 using namespace std;
 
@@ -16,25 +17,24 @@ typedef enum {
     DIV_INST = 'D'
 } instructionType;
 
-class Instruction
-{
+class Instruction {
 public:
-    float operandA;
-    float operandB;
+    double operandA;
+    double operandB;
 
     instructionType type;
 
     Instruction(string instructionLine);
 
-    float execute();
+    double execute();
 };
 
-class CPU: public Component{
+class CPU: public Component {
 public:
     int cores;
     int frequency;
     
-    float reg;
+    list<double> reg;
 
     vector<Instruction> program;
 
@@ -47,11 +47,17 @@ public:
     ~CPU();
 
     // CPU should execute a program
-    float execute();
+    double execute();
 
     int simulate();
 
     void read();
+
+    void writeReg(double value);
+
+    double readReg();
+
+    int regIsEmpty();
 };
 
 #endif
