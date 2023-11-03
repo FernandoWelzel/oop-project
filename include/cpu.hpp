@@ -51,13 +51,13 @@ public:
 
     int simulate();
 
-    void read();
+    DataValue read();
 
     void writeReg(double value);
 
-    double readReg();
+    DataValue readReg();
 
-    int regIsEmpty();
+    bool regIsEmpty();
 };
 
 #endif

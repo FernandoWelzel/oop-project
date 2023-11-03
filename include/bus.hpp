@@ -24,9 +24,11 @@ public:
         return 1;
     };
 
-    void read(){
+    DataValue read(){
         // TODO
         cout << "Temporary message - memory read method" << endl;
+    
+        return DataValue(0, false);
     };
     
     // Constructor

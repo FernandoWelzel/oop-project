@@ -73,10 +73,8 @@ int CPU::simulate() {
 }
 
 // Reads one of the values of the FIFO
-void CPU::read() {
-    double value = readReg();
-    
-    return;
+DataValue CPU::read() {
+    return readReg();
 }
 
 // Executes one instruction and increments program counter
@@ -97,23 +95,21 @@ void CPU::writeReg(double value){
 }
 
 // Reads value from internal FIFO register
-double CPU::readReg(){
-    if(regIsEmpty()) {
-        cerr << "ERROR: Trying to read from an empty FIFO" << endl;
-        
-        return 1;
-    }
-    
-    double front = reg.front();
+DataValue CPU::readReg(){
+    double value = reg.front();
+
+    bool valid = !regIsEmpty();
+
+    DataValue frontData = DataValue(value, valid);
 
     // Removes first element
     reg.pop_front();
 
-    return front;
+    return frontData;
 }
 
 // Returns 1 is FIFO is empty
-int CPU::regIsEmpty() {
+bool CPU::regIsEmpty() {
     return reg.size() == 0;
 }
 

@@ -27,8 +27,10 @@ public:
         return 0;
     }
     
-    void read(){
+    DataValue read(){
         cout << "Temporary message - Display read method" << endl;
+        
+        return DataValue(0, false);
     }
 };
 

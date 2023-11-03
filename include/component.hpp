@@ -7,6 +7,15 @@ using namespace std;
 
 typedef enum {CPU_T, BUS_T, DISPLAY_T, MEMORY_T} componentType;
 
+class DataValue {
+public:
+    double value;
+    
+    bool valid;
+
+    DataValue(double _value, bool _valid) : value(_value), valid(_valid) {};
+};
+
 class Component{
 protected:
     string label;
@@ -17,7 +26,7 @@ public:
 
     virtual int simulate() = 0;
     
-    virtual void read() = 0;
+    virtual DataValue read() = 0;
     
     string getLabel();
     string getProgram();
