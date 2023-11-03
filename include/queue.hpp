@@ -60,11 +60,6 @@ public:
         
         return result;
     };
-
-    void print() {
-        cout << "Front: " << front << endl;
-        cout << "Rear: " << rear << endl;
-    }
 };
 
 #endif

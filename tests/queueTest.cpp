@@ -7,7 +7,7 @@
 
 #include "queue.hpp"
 
-TEST(queueTest, constructorTest)
+TEST(queueTest, basicTest)
 {
     const int queueSize = 4;
 
@@ -15,11 +15,7 @@ TEST(queueTest, constructorTest)
 
     // Writing until overwrite first value
     for(int i = 0; i < queueSize + 1; i++) {
-        cout << "Iteration " << i << endl;
-        
         myQueue.enQueue(i*10);
-        
-        myQueue.print();
     }
 
     // First value should be one after the overwrite
