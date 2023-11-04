@@ -13,3 +13,7 @@ enable_testing()
 add_subdirectory(source)
 add_subdirectory(include)
 add_subdirectory(tests)
+
+# Building main executable
+add_executable(project source/main)
+target_link_libraries(project PRIVATE sourceLibrary)
