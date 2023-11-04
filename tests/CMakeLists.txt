@@ -37,3 +37,8 @@ add_test(queueTest queueTest)
 add_executable(memoryTest memoryTest.cpp)
 target_link_libraries(memoryTest PRIVATE gtest_main sourceLibrary)
 add_test(memoryTest memoryTest)
+
+# Bus test
+add_executable(busTest busTest.cpp)
+target_link_libraries(busTest PRIVATE gtest_main sourceLibrary)
+add_test(busTest busTest)
