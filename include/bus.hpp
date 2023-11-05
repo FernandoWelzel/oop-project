@@ -21,7 +21,7 @@ public:
 
     Component *sourceP;
  
-    int simulate(){ 
+    int simulate(bool verboseFlag){ 
         replace(this->status.begin(), this->status.end(), false, true); // Moves all pending to Ready
         int i;  // iterator
         list<DataValue> result; // Store simulate method results 

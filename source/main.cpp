@@ -56,7 +56,7 @@ int main(int argc, char* argv[]) {
     myPlatform.build();
 
     // Simulate all components
-    myPlatform.simulate();
+    myPlatform.simulate(verboseFlag);
     
     return 0;
 }

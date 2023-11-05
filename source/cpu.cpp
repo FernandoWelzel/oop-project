@@ -63,7 +63,13 @@ CPU::CPU(string cpuPath) {
 }
 
 // Executes "frequency" instructions and writes values to FIFO
-int CPU::simulate() {
+int CPU::simulate(bool verboseFlag) {
+    // Prints verbose
+    if(verboseFlag) {
+        cout << "CPU: " << label << endl;
+        cout << "    CORES: " << cores << endl;
+    }
+
     // Execute each instruction
     for(int i = 0; i < frequency; i++) {
         writeReg(execute());

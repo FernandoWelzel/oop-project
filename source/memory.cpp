@@ -54,7 +54,7 @@ Memory::~Memory() {
     delete memory;
 }
 
-int Memory::simulate() {
+int Memory::simulate(bool verboseFlag) {
     if(accessCounter == accessTime) {
         // Getting value from source
         DataValue readData = sourceP->read();

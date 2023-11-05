@@ -173,14 +173,19 @@ int Platform::findLabel(string label, Component* &componentP) {
 }
 
 // Simulates all components in the platform
-int Platform::simulate() {
-    // Runs platform 
+int Platform::simulate(bool verboseFlag) {
+    // Prints verbose
+    if(verboseFlag) {
+        cout << "Platform" << endl << endl;
+    }
+
+    // Runs platform
     while(1) {
         vector<Component*>::iterator it;
 
         // Iterates simulating each component
         for(it = components.begin(); it != components.end(); ++it) {
-            if((*it)->simulate()) return 1;
+            if((*it)->simulate(verboseFlag)) return 1;
         }
     }
 

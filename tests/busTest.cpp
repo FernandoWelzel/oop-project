@@ -56,7 +56,7 @@ TEST(busTest, busSimulate)
 
     // Calling method
     // DataValue test_out;
-    myBus->simulate();
+    myBus->simulate(false);
 
     // Hard coded verification
     //cout << "Value obtained after read operation:" << << endl;

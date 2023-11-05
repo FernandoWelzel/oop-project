@@ -21,7 +21,7 @@ public:
     ~Display();
 
     // Display should knows who has been connected to it: method? TODO
-    int simulate(){
+    int simulate(bool verboseFlag){
         cout << "Temporary message - Display simulation method" << endl;
         
         return 0;
