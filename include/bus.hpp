@@ -22,6 +22,11 @@ public:
     Component *sourceP;
  
     int simulate(bool verboseFlag){ 
+        // Print verbose
+        if(verboseFlag) {
+            cout << "BUS simulated: " << label << endl; 
+        }
+
         replace(this->status.begin(), this->status.end(), false, true); // Moves all pending to Ready
         int i;  // iterator
         list<DataValue> result; // Store simulate method results 
@@ -35,7 +40,7 @@ public:
 
             if (!(itr->valid)){         // if value invalid, break
                 // cout << "Invalid value detected, iteration: " << i << endl;
-                return 1;
+                // return 1;
                 break;
             }
             else{
@@ -43,7 +48,8 @@ public:
             }
         }
         // cout << "Temporary message - memory simulation method" << endl;
-        return 1;
+        
+        return 0;
     };
 
     DataValue read(){

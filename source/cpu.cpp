@@ -64,10 +64,9 @@ CPU::CPU(string cpuPath) {
 
 // Executes "frequency" instructions and writes values to FIFO
 int CPU::simulate(bool verboseFlag) {
-    // Prints verbose
+    // Print verbose
     if(verboseFlag) {
-        cout << "CPU: " << label << endl;
-        cout << "    CORES: " << cores << endl;
+        cout << "CPU simulated: " << label << endl; 
     }
 
     // Execute each instruction
@@ -131,6 +130,8 @@ Instruction::Instruction(string instructionLine){
 }
 
 double Instruction::execute() {
+    cout << "Executing instruction " << (char)type << " of " << operandA << " and " << operandB << endl; 
+    
     double result;
     
     switch (type)
@@ -152,7 +153,7 @@ double Instruction::execute() {
         break;
     
     default:
-        cerr << "ERROR: Operation " << type << " not implemented" << endl;
+        cerr << "ERROR: Operation " << (char)type << " not implemented" << endl;
         break;
     }
 
