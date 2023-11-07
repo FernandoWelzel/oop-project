@@ -42,6 +42,7 @@ Bus::Bus(string busPath){
             cerr << "ERROR: In file " << busPath << " attribute " << description << " not implemented " << endl;
         }
     }
+
     busFile.close();
 }
 
@@ -61,13 +62,34 @@ DataValue Bus::read(){
 }   
 
 int Bus::simulate(bool verboseFlag){ 
-    this->ready = this->pending; // moves pending to ready
-    int i;  // iterator
+    if(verboseFlag) {
+        cout << "Bus simulated: " << label << endl;
+    }
+    
+    // Inserting pending into ready
+    ready.insert(ready.end(), pending.begin(), pending.end()); // moves pending to ready
+
+    // Deleting pending
+    pending.erase(pending.begin(), pending.end());
+
+    // Initializing data
     DataValue readData(0, false);
 
-    for (i = 0; i <= this-> width; i++){
+    for (int i = 0; i <= this->width; i++){
+        cout << "SourceP is: " << sourceP->getLabel() << endl;
+
         readData = (sourceP->read());
+
+        if(verboseFlag) {
+            if(readData.valid) {
+                cout << "Bus read valid data: " << readData.value << endl;
+            } else {
+                cout << "Bus read invalid data" << endl;
+            }
+        }
+
         pending.insert(pending.end(), readData.value);
+        
         if (!readData.valid){
             break;
         }

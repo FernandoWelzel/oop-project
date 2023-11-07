@@ -79,6 +79,8 @@ int CPU::simulate(bool verboseFlag) {
 
 // Reads one of the values of the FIFO
 DataValue CPU::read() {
+    cout << "CPU was read" << endl;
+
     return readReg();
 }
 
@@ -101,9 +103,14 @@ void CPU::writeReg(double value){
 
 // Reads value from internal FIFO register
 DataValue CPU::readReg(){
-    double value = reg.front();
-
     bool valid = !regIsEmpty();
+
+    // Quit loop if not valid
+    if(!valid) {
+        return DataValue(0, false);
+    }
+    
+    double value = reg.front();
 
     DataValue frontData = DataValue(value, valid);
 
@@ -115,7 +122,7 @@ DataValue CPU::readReg(){
 
 // Returns 1 is FIFO is empty
 bool CPU::regIsEmpty() {
-    return reg.size() == 0;
+    return reg.empty();
 }
 
 Instruction::Instruction(string instructionLine){
