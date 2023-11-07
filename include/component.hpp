@@ -5,7 +5,7 @@
 
 using namespace std;
 
-typedef enum {CPU_T, BUS_T, DISPLAY_T, MEMORY_T} componentType;
+typedef enum {PLATFORM_T, CPU_T, BUS_T, DISPLAY_T, MEMORY_T} componentType;
 
 class DataValue {
 public:
@@ -19,7 +19,6 @@ public:
 class Component{
 protected:
     string label;
-    string program;
 
 public:
     componentType type;

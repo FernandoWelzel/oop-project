@@ -9,7 +9,3 @@ using namespace std;
 string Component::getLabel() {
     return this->label;
 }
-
-string Component::getProgram() {
-    return this->program;
-}
