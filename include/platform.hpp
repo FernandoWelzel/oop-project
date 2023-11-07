@@ -21,7 +21,7 @@ public:
 
     void build(); 
 
-    int simulate();
+    int simulate(bool verboseFlag);
 
     void addComponent(string componentPath);
 

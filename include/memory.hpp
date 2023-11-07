@@ -24,7 +24,7 @@ public:
 
     void store();
     
-    int simulate();
+    int simulate(bool verboseFlag);
 
     DataValue read();
     

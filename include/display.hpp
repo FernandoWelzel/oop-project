@@ -21,9 +21,23 @@ public:
     // Destructor
     ~Display();
 
-    // Methods
-    int simulate();
-    virtual DataValue read();
+    // Display should knows who has been connected to it: method? TODO
+    int simulate(bool verboseFlag){
+        // Print verbose
+        if(verboseFlag) {
+            cout << "Display simulated: " << label << endl; 
+        }
+        
+        cout << "Temporary message - Display simulation method" << endl;
+        
+        return 0;
+    }
+    
+    DataValue read(){
+        cout << "Temporary message - Display read method" << endl;
+        
+        return DataValue(0, false);
+    }
 };
 
 

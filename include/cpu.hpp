@@ -49,7 +49,7 @@ public:
     // CPU should execute a program
     double execute();
 
-    int simulate();
+    int simulate(bool verboseFlag);
 
     DataValue read();
 

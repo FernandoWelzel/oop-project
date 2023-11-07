@@ -24,7 +24,7 @@ protected:
 public:
     componentType type;
 
-    virtual int simulate() = 0;
+    virtual int simulate(bool verboseFlag) = 0;
     
     virtual DataValue read() = 0;
     

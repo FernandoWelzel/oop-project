@@ -50,7 +50,9 @@ TEST(busTest, busSimulate)
     myBus->variable.push_front(test4);
     myBus->status.push_back(false);
 
-    myBus->simulate();
+    // Calling method
+    // DataValue test_out;
+    myBus->simulate(false);
 
 }
 

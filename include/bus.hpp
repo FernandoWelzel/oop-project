@@ -18,7 +18,46 @@ public:
     vector<double> ready;
 
     string source;
-    Component *sourceP; 
+
+    Component *sourceP;
+ 
+    int simulate(bool verboseFlag){ 
+        // Print verbose
+        if(verboseFlag) {
+            cout << "BUS simulated: " << label << endl; 
+        }
+
+        replace(this->status.begin(), this->status.end(), false, true); // Moves all pending to Ready
+        int i;  // iterator
+        list<DataValue> result; // Store simulate method results 
+
+        auto itr = result.begin();  // iterator
+        DataValue& element = *itr;  // Used to access elements of result
+        cout << "before loop" << endl;
+
+        for (i = 0; i < this->width; i++){
+            result.push_front(this->read());  // calling read method to store value
+
+            if (!(itr->valid)){         // if value invalid, break
+                // cout << "Invalid value detected, iteration: " << i << endl;
+                // return 1;
+                break;
+            }
+            else{
+                this->status.push_back(false);   // stored as pending 
+            }
+        }
+        // cout << "Temporary message - memory simulation method" << endl;
+        
+        return 0;
+    };
+
+    DataValue read(){
+        // cout << "Memory read method" << endl;
+        counter++;
+        // cout << "Counter: " << counter << endl;
+        return get(variable, counter-1);
+    };
     
     // Constructor
     Bus(string busPath);

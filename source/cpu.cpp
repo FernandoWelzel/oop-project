@@ -63,7 +63,12 @@ CPU::CPU(string cpuPath) {
 }
 
 // Executes "frequency" instructions and writes values to FIFO
-int CPU::simulate() {
+int CPU::simulate(bool verboseFlag) {
+    // Print verbose
+    if(verboseFlag) {
+        cout << "CPU simulated: " << label << endl; 
+    }
+
     // Execute each instruction
     for(int i = 0; i < frequency; i++) {
         writeReg(execute());
@@ -125,6 +130,8 @@ Instruction::Instruction(string instructionLine){
 }
 
 double Instruction::execute() {
+    cout << "Executing instruction " << (char)type << " of " << operandA << " and " << operandB << endl; 
+    
     double result;
     
     switch (type)
@@ -146,7 +153,7 @@ double Instruction::execute() {
         break;
     
     default:
-        cerr << "ERROR: Operation " << type << " not implemented" << endl;
+        cerr << "ERROR: Operation " << (char)type << " not implemented" << endl;
         break;
     }
 
