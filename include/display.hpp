@@ -2,12 +2,13 @@
 #define _DISPLAY_HPP_
 
 #include "component.hpp"
-
 #include <iostream>
 
 using namespace std;
 
 class Display: public Component{
+private:
+    int react = 0;
 public:
     int refresh_rate;
     
@@ -20,18 +21,9 @@ public:
     // Destructor
     ~Display();
 
-    // Display should knows who has been connected to it: method? TODO
-    int simulate(){
-        cout << "Temporary message - Display simulation method" << endl;
-        
-        return 0;
-    }
-    
-    DataValue read(){
-        cout << "Temporary message - Display read method" << endl;
-        
-        return DataValue(0, false);
-    }
+    // Methods
+    int simulate();
+    virtual DataValue read();
 };
 
 

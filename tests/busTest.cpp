@@ -6,33 +6,29 @@
 #include <string>
 #include <list>
 
-// Simple test - Try to parse a TYPE
-// TEST(busTest, busSimulate)
-// {
 
-// }
 
 // Simple test - try to read a value from bus
-// TEST(busTest, busRead)
-// {
-//     // Creating DataValue variables
-//     DataValue test(2.01, false);
-//     DataValue test1(3.02, false);
-//     DataValue test_out(0, false);
-//     // Creating Bus
-//     Bus *myBus = new Bus("data/bus1.txt");
+TEST(busTest, busRead)
+{
+    // Creating DataValue variables
+    DataValue test(2.01, false);
+    DataValue test1(3.02, false);
+    DataValue test_out(0, false);
+    // Creating Bus
+    Bus *myBus = new Bus("data/bus1.txt");
+  
+    // Inserting variable
+    myBus->variable.push_front(test);
+    myBus->variable.push_front(test1);
  
-//     // Inserting variable
-//     myBus->variable.push_front(test);
-//     myBus->variable.push_front(test1);
-
-//     // Calling method
-//     // DataValue test_out;
-//     test_out = myBus->read();
-
-//     // Hard coded verification
-//     cout << "Value obtained after read operation: " << test_out.value << endl;
-// }
+    // Calling method
+    // DataValue test_out;
+    test_out = myBus->read();
+ 
+    // Hard coded verification
+    cout << "Value obtained after read operation: " << test_out.value << endl;
+}
 
 TEST(busTest, busSimulate)
 {
@@ -54,13 +50,7 @@ TEST(busTest, busSimulate)
     myBus->variable.push_front(test4);
     myBus->status.push_back(false);
 
-    // Calling method
-    // DataValue test_out;
     myBus->simulate();
-
-    // Hard coded verification
-    //cout << "Value obtained after read operation:" << << endl;
-    // cout << "Status after read operation:" << test_out.valid << endl;
 
 }
 

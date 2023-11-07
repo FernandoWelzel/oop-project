@@ -4,6 +4,7 @@
 
 #include "display.hpp"
 #include "parse.hpp"
+#include "component.hpp"
 
 using namespace std;
 
@@ -38,4 +39,35 @@ Display::Display(string displayPath){
     }
 
     displayFile.close();
+}
+
+Display::~Display(){};
+
+int Display::simulate(){
+    if ( this->react % this->refresh_rate != 0 ){
+        this->react++;
+        cout << "Impossible to simulate due to Refresh Rate." << endl;  
+        return 0;
+    }
+    else{
+        read();
+    }
+    cout << "Temporary message - Display simulation method" << endl;
+        
+    return 0;
+}
+
+DataValue Display::read(){
+    cout << "In read method of Display" << endl;
+    DataValue readData(sourceP->read());
+    // DataValue readData(sourceP->read()); // Storing value read from source
+    cout << "DATA obtained: " << readData.value << endl;
+    if ( readData.valid ){
+        cout << "DISPLAY - Value read: "<< readData.value << endl;
+        this->read(); // Continue to read 
+    }
+    else{ // invalid DataValue
+        return DataValue(0, false);
+    }
+    return DataValue(0, false);
 }

@@ -72,5 +72,5 @@ int Bus::simulate(){
             break;
         }
     }
-   
+    return 0;
 };
