@@ -2,12 +2,13 @@
 #define _DISPLAY_HPP_
 
 #include "component.hpp"
-
 #include <iostream>
 
 using namespace std;
 
 class Display: public Component{
+private:
+    int react = 0;
 public:
     int refresh_rate;
     

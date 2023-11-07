@@ -42,3 +42,8 @@ add_test(memoryTest memoryTest)
 add_executable(busTest busTest.cpp)
 target_link_libraries(busTest PRIVATE gtest_main sourceLibrary)
 add_test(busTest busTest)
+
+# Display test
+add_executable(displayTest displayTest.cpp)
+target_link_libraries(displayTest PRIVATE gtest_main sourceLibrary)
+add_test(displayTest displayTest)

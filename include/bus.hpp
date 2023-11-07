@@ -14,9 +14,9 @@ class Bus: public Component {
 public:
     int width;
     int counter = 0;
+    vector<double> pending;
+    vector<double> ready;
 
-    vector<bool> status; // TRUE == Ready, FALSE == pending
-    list<DataValue> variable; // Store variables
     string source;
 
     Component *sourceP;
@@ -64,7 +64,12 @@ public:
     // Destructor
     ~Bus();
 
+    // Methods
+    int simulate();
+    // virtual DataValue read();
     DataValue get(list<DataValue> _list, int counter);
+    DataValue read();
+
 };
 
 #endif
