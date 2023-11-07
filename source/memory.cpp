@@ -60,16 +60,24 @@ int Memory::simulate(bool verboseFlag) {
         cout << "Memory simulated: " << label << endl; 
     }
 
-    if(accessCounter == accessTime) {
+    if(accessCounter == accessTime - 1) {
         // Getting value from source
         DataValue readData = sourceP->read();
 
         while(readData.valid) {
+            if(verboseFlag) {
+                cout << "Read valid data of value : " << readData.value << endl; 
+            }
+        
             // Storing value in memory
             memory->enQueue(readData.value);
 
             // Updating data value
             readData = sourceP->read();
+        }
+
+        if(verboseFlag) {
+            cout << "Read unvalid data" << endl; 
         }
     }
 

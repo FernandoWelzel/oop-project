@@ -22,7 +22,39 @@ Platform::Platform(string platformPath) {
         return;
     }
 
+    // Getting component
     string line;
+    string description;
+    string value;
+
+    // Getting unused TYPE line
+    getline(platformFile, line);
+    parseLine(line, description, value);
+
+    // Handle malformating
+    if(description != "TYPE" && value != "PLATFORM") {
+        cerr << "ERROR: Malformated file: " << platformPath << endl;
+        return;
+    }
+
+    // Defining component type
+    this->type = PLATFORM_T;
+
+    while(getline(platformFile, line)) {
+        // Store description and value from line
+        parseLine(line, description, value);
+
+        // Switch description - TODO: Should probably check values before storing them
+        if(description == "LABEL") {
+            this->label = value; 
+        }
+        else if(description == "COMPONENT"){
+            addComponent(value);
+        }
+        else {
+            cerr << "ERROR: In file " << platformPath << " attribute " << description << " not implemented yet" << endl; 
+        }
+    }
 
     // Read each line from the file
     while (getline(platformFile, line)) {
@@ -34,8 +66,9 @@ Platform::Platform(string platformPath) {
 }
 
 Platform::~Platform() {
-    for (auto component : components)
+    for (auto component : components) {
         delete component;
+    }
 }
 
 void Platform::addComponent(string componentPath) {
@@ -63,6 +96,12 @@ void Platform::addComponent(string componentPath) {
     }
 
     // Get type of component
+    if (value == "PLATFORM") {
+        Platform* newPlatform = new Platform(value);
+
+        // Adding to platform vector
+        components.push_back(newPlatform);
+    }
     if (value == "CPU") {
         CPU* newCPU = new CPU(componentPath);
 
@@ -86,8 +125,7 @@ void Platform::addComponent(string componentPath) {
 
         // Adding to a vector
         components.push_back(newBus);
-    } 
-    // else if (value == "PROGRAM") {} 
+    }
     else {
         cerr << "ERROR: Component " << value << " not supported yet" << endl;
     }
@@ -206,4 +244,9 @@ int Platform::simulate(bool verboseFlag) {
     }
 
     return 0;
+}
+
+// Default reading from platform
+DataValue Platform::read() {
+    return DataValue(0, 0);
 }

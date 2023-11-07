@@ -10,7 +10,7 @@
 
 using namespace std;
 
-class Platform{
+class Platform: public Component {
 public:
     // Creating vector of pointers to Components
     vector<Component*> components;
@@ -22,6 +22,8 @@ public:
     void build(); 
 
     int simulate(bool verboseFlag);
+
+    DataValue read();
 
     void addComponent(string componentPath);
 
