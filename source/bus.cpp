@@ -47,24 +47,30 @@ Bus::Bus(string busPath){
 
 Bus::~Bus(){}
 
-DataValue Bus::get(list<DataValue> _list, int counter){
-
-    auto itr = _list.begin();
-    advance(itr, counter);
-    DataValue& element = *itr;
-
-    while(itr != _list.end()){
-        // cout << "on Get - While" << endl;
-        if (itr->valid){
-            // cout << "Found valid value" << endl;
-            // cout << "Value transmitted: " << element.value << endl;
-            return element;
-            break;            
-        }
-        itr++;
+DataValue Bus::read(){
+    DataValue readData = (sourceP->read()); // creates variable
+    this->counter++;
+    if (!ready.empty()){                    // ready vector not empty
+        readData.value = ready[0];          // changing value
+        ready.erase(ready.begin());         // 
+        return readData;
     }
-    // cout << "Did NOT Found valid value" << endl;
-    // cout << "Value transmitted: " << element.value << endl;
+    else{
+        return DataValue(0, false);
+    }
+}   
 
-    return element;
-}
+int Bus::simulate(){ 
+    this->ready = this->pending; // moves pending to ready
+    int i;  // iterator
+    DataValue readData(0, false);
+
+    for (i = 0; i <= this-> width; i++){
+        readData = (sourceP->read());
+        pending.insert(pending.end(), readData.value);
+        if (!readData.valid){
+            break;
+        }
+    }
+   
+};
