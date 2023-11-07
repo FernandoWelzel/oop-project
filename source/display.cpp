@@ -43,31 +43,23 @@ Display::Display(string displayPath){
 
 Display::~Display(){};
 
-int Display::simulate(){
+int Display::simulate(bool verboseFlag){
+    // Print verbose
+    if(verboseFlag) {
+        cout << "Display simulated: " << label << endl; 
+    }
+
+    DataValue readData = sourceP->read();       // Declaration of variable  
     if ( this->react % this->refresh_rate != 0 ){
         this->react++;
         cout << "Impossible to simulate due to Refresh Rate." << endl;  
         return 0;
     }
     else{
-        read();
+        while(readData.valid){
+            cout << "DISPLAY - Value Read:" << readData.value << endl;
+            readData = sourceP->read();
     }
-    cout << "Temporary message - Display simulation method" << endl;
-        
+    }        
     return 0;
-}
-
-DataValue Display::read(){
-    cout << "In read method of Display" << endl;
-    DataValue readData(sourceP->read());
-    // DataValue readData(sourceP->read()); // Storing value read from source
-    cout << "DATA obtained: " << readData.value << endl;
-    if ( readData.valid ){
-        cout << "DISPLAY - Value read: "<< readData.value << endl;
-        this->read(); // Continue to read 
-    }
-    else{ // invalid DataValue
-        return DataValue(0, false);
-    }
-    return DataValue(0, false);
 }

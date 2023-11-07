@@ -60,7 +60,7 @@ DataValue Bus::read(){
     }
 }   
 
-int Bus::simulate(){ 
+int Bus::simulate(bool verboseFlag){ 
     this->ready = this->pending; // moves pending to ready
     int i;  // iterator
     DataValue readData(0, false);

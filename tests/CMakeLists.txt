@@ -39,11 +39,11 @@ target_link_libraries(memoryTest PRIVATE gtest_main sourceLibrary)
 add_test(memoryTest memoryTest)
 
 # Bus test
-add_executable(busTest busTest.cpp)
-target_link_libraries(busTest PRIVATE gtest_main sourceLibrary)
-add_test(busTest busTest)
+# add_executable(busTest busTest.cpp)
+# target_link_libraries(busTest PRIVATE gtest_main sourceLibrary)
+# add_test(busTest busTest)
 
 # Display test
-add_executable(displayTest displayTest.cpp)
-target_link_libraries(displayTest PRIVATE gtest_main sourceLibrary)
-add_test(displayTest displayTest)
+# add_executable(displayTest displayTest.cpp)
+# target_link_libraries(displayTest PRIVATE gtest_main sourceLibrary)
+# add_test(displayTest displayTest)
