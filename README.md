@@ -25,7 +25,7 @@ An example of execution, running only the first simulation step with the verbose
 
 ```sh
 cd build
-./project -s -v 1 data/platform.txt
+./project -v -s 1 data/platform.txt
 ```
 
 ## Tests
