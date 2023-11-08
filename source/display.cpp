@@ -52,7 +52,7 @@ Display::~Display(){};
 int Display::simulate(bool verboseFlag){
     // Print verbose
     if(verboseFlag) {
-        cout << "Display simulated: " << label << endl; 
+        COLOR("Display simulating", YELLOW_TEXT);
     }
 
     DataValue readData = sourceP->read();       // Declaration of variable  
@@ -61,11 +61,11 @@ int Display::simulate(bool verboseFlag){
         cout << "Impossible to simulate due to Refresh Rate." << endl;  
         return 0;
     }
-    else{
+    else {
         while(readData.valid){
-            cout << "DISPLAY - Value Read:" << readData.value << endl;
+            DISPLAY_TEXT(readData.value);
             readData = sourceP->read();
-    }
+        }
     }        
     return 0;
 }

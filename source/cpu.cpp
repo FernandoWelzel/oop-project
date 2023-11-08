@@ -91,9 +91,8 @@ void CPU::printReg() {
 int CPU::simulate(bool verboseFlag) {
     // Print verbose
     if(verboseFlag) {
-        cout << "CPU simulated: " << label << endl;
+        COLOR(label << " simulating", YELLOW_TEXT);
         cout << "Active CORE: " << activeCore+1 << endl;
-        printReg(); 
     }
 
     // Execute each instruction
@@ -183,9 +182,19 @@ Instruction::Instruction(instructionType _type, double _operandA, double _operan
     operandA(_operandA),
     operandB(_operandB) {}
 
+// Execute each instruction -> Returning the result
 double Instruction::execute(bool verboseFlag) {
+    // Map for name conversion
+    map<instructionType, string> inst2string = {
+        {ADD_INST, "ADD"},
+        {SUB_INST, "SUB"},
+        {MUL_INST, "MUL"},
+        {DIV_INST, "DIV"},
+        {NOP_INST, "NOP"}    
+    };
+
     if(verboseFlag) {
-        cout << "Executing instruction " << (char)type << " of " << operandA << " and " << operandB << endl;
+        cout << "Executing instruction: " << inst2string[type] << " " << operandA << " " << operandB << endl;
     }
     
     double result;

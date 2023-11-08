@@ -7,6 +7,7 @@
 #include <vector>
 #include <string>
 #include <list>
+#include <map>
 
 using namespace std;
 
@@ -28,7 +29,7 @@ public:
     Instruction(string instructionLine);
 
     Instruction(instructionType _type, double _operandA, double _operandB);
-    
+
     double execute(bool verboseFlag);
 };
 

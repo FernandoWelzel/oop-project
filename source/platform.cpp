@@ -233,10 +233,14 @@ int Platform::findLabel(string label, Component* &componentP) {
 int Platform::simulate(bool verboseFlag) {
     vector<Component*>::iterator it;
 
+    if(verboseFlag) {
+        cout << endl;
+    }
+
     // Runs each simulation step
-    for(int i = 0; i < simulationSteps; i++) {
+    for(int i = 1; i < simulationSteps + 1; i++) {
         if(verboseFlag) {
-            COLOR(" ================ Simulation step " << i << " ================", BLUE_TEXT); cout << endl;
+            COLOR("================== Simulation step " << i << " ==================", BLUE_TEXT); cout << endl;
         }
 
         // Iterates simulating each component

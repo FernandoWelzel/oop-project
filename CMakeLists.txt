@@ -17,3 +17,6 @@ add_subdirectory(tests)
 # Building main executable
 add_executable(project source/main)
 target_link_libraries(project PRIVATE sourceLibrary)
+
+# Making test data available at this folder
+file(COPY tests/data DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

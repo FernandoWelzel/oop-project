@@ -75,23 +75,7 @@ DataValue Bus::read(){
 
 int Bus::simulate(bool verboseFlag){ 
     if(verboseFlag) {
-        cout << "Bus simulated: " << label << endl;
-    }
-
-    if(verboseFlag) {
-        // Print ready
-        cout << "PENDING: ";
-        for(vector<double>::iterator it = pending.begin(); it != pending.end(); ++it) {
-            cout << *it <<  ", ";
-        }
-        cout << endl;
-
-        // Print ready
-        cout << "READY: ";
-        for(vector<double>::iterator it = ready.begin(); it != ready.end(); ++it) {
-            cout << *it <<  ", ";
-        }
-        cout << endl;
+        COLOR(label << " simulating", YELLOW_TEXT);
     }
     
     // Inserting pending into ready

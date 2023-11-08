@@ -63,13 +63,12 @@ Memory::~Memory() {
 int Memory::simulate(bool verboseFlag) {
     // Print verbose
     if(verboseFlag) {
-        cout << "Memory simulated: " << label << endl; 
-        cout << "Memory getting data from " << sourceP->getLabel() << endl;
+        COLOR(label << " simulating", YELLOW_TEXT);
     }
 
     if(accessCounter == accessTime - 1) {
         if(verboseFlag) {
-            cout << "Access counter reached" << endl;
+            cout << "Memory started burst reading" << endl;
         } 
         
         // Getting value from source
