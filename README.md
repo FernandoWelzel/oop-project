@@ -13,6 +13,21 @@ cmake ..
 make
 ```
 
+## Running
+
+To run the main executable, place yourself in the `build` folder and run the executable by the name `project`. For the moment, the executable accepts 3 options:  
+
+- Help (-h)
+- Verbose (-v): Prints extra debugging messages about each component
+- Steps (-s STEPS): Determines the number of simulation steps
+
+An example of execution, running only the first simulation step with the verbose flag, can be seen in the following code block:
+
+```sh
+cd build
+./project -s -v 1 data/platform.txt
+```
+
 ## Tests
 
 This project uses the [GoogleTest](https://github.com/google/googletest) framework. There is no need to install it own your machine as it is fetched during the compilation process with Cmake. To to run the tests run the following list of commands:  
@@ -31,10 +46,10 @@ cd build/tests
 
 ## Wishlist
 
-- [ ] Creating main executable
-  - [ ] Adding the verbose flag to the executable
-- [ ] Implementing display component
+- [x] Creating main executable
+  - [x] Adding the verbose flag to the executable
+- [x] Implementing display component
 - [ ] Updating architecture
 - [ ] Improve test error messages using [GoogleTest](https://github.com/google/googletest)
-- [ ] Improve error handling using throw
+- [x] Improve error handling using throw
 - [ ] Start using namespaces
