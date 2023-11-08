@@ -15,7 +15,9 @@ public:
     // Creating vector of pointers to Components
     vector<Component*> components;
 
-    Platform(string platformPath);
+    int simulationSteps;
+
+    Platform(string platformPath, int _simulationSteps);
 
     ~Platform(); 
 

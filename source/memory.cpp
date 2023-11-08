@@ -1,10 +1,12 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <sstream>
 
 #include "memory.hpp"
 #include "parse.hpp"
 #include "queue.hpp"
+#include "formating.hpp"
 
 using namespace std;
 
@@ -40,7 +42,11 @@ Memory::Memory(string memoryPath) {
             this->source = value;
         }
         else{
-            cerr << "ERROR: In file " << memoryPath << " attribute " << description << " not implemented " << endl;
+            ostringstream errorString;
+
+            errorString << "In file " << memoryPath << " attribute " << description << " not implemented ";
+
+            throw runtime_error(errorString.str());
         }
     }
 

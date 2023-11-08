@@ -1,6 +1,8 @@
 #ifndef _QUEUE_HPP_
 #define _QUEUE_HPP_
 
+#include "formating.hpp"
+
 using namespace std;
 
 template<typename T> class Queue {
@@ -53,7 +55,7 @@ public:
     T deQueue(){
         // Checks for not dequeing an empty list
         if(isEmpty())  {
-            cerr << "ERROR: Dequeing an empty list" << endl;
+            throw runtime_error("Dequeing an empty list");
             
             return 0;  
         }

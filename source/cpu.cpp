@@ -1,9 +1,11 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <sstream>
 
 #include "cpu.hpp"
 #include "parse.hpp"
+#include "formating.hpp"
 
 using namespace std;
 
@@ -54,7 +56,11 @@ CPU::CPU(string cpuPath) {
             programFile.close();
         }
         else {
-            cerr << "ERROR: In file " << cpuPath << " attribute " << description << " not implemented yet" << endl; 
+            ostringstream errorString;
+
+            errorString << "In file " << cpuPath << " attribute " << description << " not implemented yet";
+
+            throw runtime_error(errorString.str()); 
         }
     }
 
@@ -62,16 +68,32 @@ CPU::CPU(string cpuPath) {
     cpuFile.close();
 }
 
+// Prints register values in sequence
+void CPU::printReg() {
+    // Print register
+    cout << "REG: ";
+    for(list<double>::iterator it = reg.begin(); it != reg.end(); ++it) {
+        cout << *it <<  " ";
+    }
+    cout << endl;
+}
+
 // Executes "frequency" instructions and writes values to FIFO
 int CPU::simulate(bool verboseFlag) {
     // Print verbose
     if(verboseFlag) {
-        cout << "CPU simulated: " << label << endl; 
+        cout << "CPU simulated: " << label << endl;
+        
+        printReg(); 
     }
 
     // Execute each instruction
     for(int i = 0; i < frequency; i++) {
-        writeReg(execute());
+        writeReg(execute(verboseFlag));
+    }
+
+    if(verboseFlag) {
+        printReg(); 
     }
 
     return 0;
@@ -79,14 +101,12 @@ int CPU::simulate(bool verboseFlag) {
 
 // Reads one of the values of the FIFO
 DataValue CPU::read() {
-    cout << "CPU was read" << endl;
-
     return readReg();
 }
 
 // Executes one instruction and increments program counter
-double CPU::execute(){
-    double result = programCounter->execute();
+double CPU::execute(bool verboseFlag){
+    double result = programCounter->execute(verboseFlag);
 
     // Update program counter if not in the end
     if(programCounter < program.end()) {
@@ -99,13 +119,6 @@ double CPU::execute(){
 // Writes value to internal FIFO register
 void CPU::writeReg(double value){
     reg.push_back(value);
-
-    // Print register
-    cout << "REG: ";
-    for(list<double>::iterator it = reg.begin(); it != reg.end(); ++it) {
-        cout << *it <<  ", ";
-    }
-    cout << endl;
 }
 
 // Reads value from internal FIFO register
@@ -127,7 +140,7 @@ DataValue CPU::readReg(){
 
 // Returns 1 is FIFO is empty
 bool CPU::regIsEmpty() {
-    return reg.size() == 0;
+    return reg.empty();
 }
 
 Instruction::Instruction(string instructionLine){
@@ -141,8 +154,10 @@ Instruction::Instruction(string instructionLine){
     operandB = stof(instructionLine.substr(spacePos, instructionLine.back()));
 }
 
-double Instruction::execute() {
-    cout << "Executing instruction " << (char)type << " of " << operandA << " and " << operandB << endl; 
+double Instruction::execute(bool verboseFlag) {
+    if(verboseFlag) {
+        cout << "Executing instruction " << (char)type << " of " << operandA << " and " << operandB << endl;
+    }
     
     double result;
     
@@ -164,9 +179,12 @@ double Instruction::execute() {
         result = operandA / operandB;
         break;
     
-    default:
-        cerr << "ERROR: Operation " << (char)type << " not implemented" << endl;
+    case NOP_INST:
+        result = 0;
         break;
+    
+    default:
+        throw runtime_error("Operation not implemented");
     }
 
     return result;

@@ -1,9 +1,11 @@
 #include <iostream>
 #include <string>
 #include <fstream> 
+#include <sstream>
 
 #include "bus.hpp"
 #include "parse.hpp"
+#include "formating.hpp"
 
 using namespace std;
 
@@ -39,7 +41,11 @@ Bus::Bus(string busPath){
             this->source = value;
         }
         else{
-            cerr << "ERROR: In file " << busPath << " attribute " << description << " not implemented " << endl;
+            ostringstream errorString;
+
+            errorString << "In file " << busPath << " attribute " << description << " not implemented ";
+
+            throw runtime_error(errorString.str());
         }
     }
 
@@ -50,8 +56,6 @@ Bus::~Bus(){}
 
 DataValue Bus::read(){
     DataValue readData(0, false);
-
-    cout << "Bus was read" << endl;
 
     this->counter++;
 
@@ -75,8 +79,6 @@ int Bus::simulate(bool verboseFlag){
     }
 
     if(verboseFlag) {
-        cout << "Beginning of simulation BUS" << endl;
-
         // Print ready
         cout << "PENDING: ";
         for(vector<double>::iterator it = pending.begin(); it != pending.end(); ++it) {
@@ -102,8 +104,6 @@ int Bus::simulate(bool verboseFlag){
     DataValue readData(0, false);
 
     for (int i = 0; i < this->width; i++){
-        cout << "SourceP is: " << sourceP->getLabel() << endl;
-
         readData = (sourceP->read());
 
         if(verboseFlag) {
@@ -123,8 +123,6 @@ int Bus::simulate(bool verboseFlag){
     }
 
     if(verboseFlag) {
-        cout << "End of simulation BUS" << endl;
-
         // Print ready
         cout << "PENDING: ";
         for(vector<double>::iterator it = pending.begin(); it != pending.end(); ++it) {

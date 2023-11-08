@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <sstream>
 
 #include "platform.hpp"
 #include "cpu.hpp"
@@ -8,18 +9,22 @@
 #include "memory.hpp"
 #include "display.hpp"
 #include "bus.hpp"
+#include "formating.hpp"
 
 using namespace std;
 
-Platform::Platform(string platformPath) {
+Platform::Platform(string platformPath, int _simulationSteps) : simulationSteps(_simulationSteps) {
     // Open the file
     ifstream platformFile;
     platformFile.open(platformPath);
 
     // Check if the file is successfully opened
     if (!platformFile.is_open()) {
-        cerr << "ERROR opening the file: " << platformPath << endl;
-        return;
+        ostringstream errorString;
+
+        errorString << "Couldn't open platform file " << platformPath;
+
+        throw runtime_error(errorString.str());
     }
 
     // Getting component
@@ -33,8 +38,11 @@ Platform::Platform(string platformPath) {
 
     // Handle malformating
     if(description != "TYPE" && value != "PLATFORM") {
-        cerr << "ERROR: Malformated file: " << platformPath << endl;
-        return;
+        ostringstream errorString;
+
+        errorString << "Malformated type in platform file " << platformPath;
+
+        throw runtime_error(errorString.str());
     }
 
     // Defining component type
@@ -52,7 +60,11 @@ Platform::Platform(string platformPath) {
             addComponent(value);
         }
         else {
-            cerr << "ERROR: In file " << platformPath << " attribute " << description << " not implemented yet" << endl; 
+            ostringstream errorString;
+
+            errorString << "In file " << platformPath << " attribute " << description << " not implemented yet";
+
+            throw runtime_error(errorString.str());
         }
     }
 
@@ -78,8 +90,11 @@ void Platform::addComponent(string componentPath) {
 
     // Check if the file is successfully opened
     if (!componentFile.is_open()) {
-        cerr << "ERROR: Couldn't open the file: " << componentPath << endl;
-        return;
+        ostringstream errorString;
+
+        errorString << "Couldn't open file: " << componentPath;
+
+        throw runtime_error(errorString.str());
     }
 
     // Declaring iterators
@@ -91,13 +106,16 @@ void Platform::addComponent(string componentPath) {
 
     // Handle malformating
     if(description != "TYPE") {
-        cerr << "ERROR: Malformated file: " << componentPath << endl;
-        return;
+        ostringstream errorString;
+
+        errorString << "In file " << componentPath << " type should be in the first line";
+
+        throw runtime_error(errorString.str());
     }
 
     // Get type of component
     if (value == "PLATFORM") {
-        Platform* newPlatform = new Platform(value);
+        Platform* newPlatform = new Platform(value, simulationSteps);
 
         // Adding to platform vector
         components.push_back(newPlatform);
@@ -127,7 +145,11 @@ void Platform::addComponent(string componentPath) {
         components.push_back(newBus);
     }
     else {
-        cerr << "ERROR: Component " << value << " not supported yet" << endl;
+        ostringstream errorString;
+
+        errorString << "Component " << value << " not supported yet";
+
+        throw runtime_error(errorString.str());    
     }
 
     // Close the file
@@ -138,8 +160,7 @@ void Platform::addComponent(string componentPath) {
 void Platform::build() {
     // Checks if list is not empty
     if(components.size() <= 0) {
-        cerr << "ERROR: Trying to build an empty platform" << endl;
-        return;
+        throw runtime_error("Trying to build an empty platform");    
     }
 
     // Creating pointers for each type
@@ -184,8 +205,7 @@ void Platform::build() {
             break;
         
         default:
-            cerr << "ERROR: Unknown component type" << endl;
-            break;
+            throw runtime_error("Unknow component type");
         }
     }
 }
@@ -194,8 +214,7 @@ void Platform::build() {
 int Platform::findLabel(string label, Component* &componentP) {
     // Checks if list is not empty
     if(components.size() <= 0) {
-        cerr << "ERROR: Trying to find label in empty platform" << endl;
-        return 1;
+        throw runtime_error("Trying to find lable of an empty platform");
     }
 
     // Go thought array trying to find label
@@ -212,35 +231,22 @@ int Platform::findLabel(string label, Component* &componentP) {
 
 // Simulates all components in the platform
 int Platform::simulate(bool verboseFlag) {
-    // Prints verbose
-    if(verboseFlag) {
-        cout << "Platform simulated" << endl << endl;
-    }
-
-    const int simulationSteps = 10;
-
-    int i = 0;
-
     vector<Component*>::iterator it;
 
-    // Runs platform
-    while(i < simulationSteps) {
+    // Runs each simulation step
+    for(int i = 0; i < simulationSteps; i++) {
         if(verboseFlag) {
-            cout << "========================= Starting simulation step " << i << " =========================" << endl << endl;
+            COLOR(" ================ Simulation step " << i << " ================", BLUE_TEXT); cout << endl;
         }
 
         // Iterates simulating each component
         for(it = components.begin(); it != components.end(); ++it) {
-            cout << "Platform simulating: " << (*it)->getLabel() << endl;
-
             if((*it)->simulate(verboseFlag)) return 1;
         
             if(verboseFlag) {
                 cout << endl;
             }
         }
-
-        i++;
     }
 
     return 0;

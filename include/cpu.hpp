@@ -14,7 +14,8 @@ typedef enum {
     ADD_INST = 'A',
     SUB_INST = 'S',
     MUL_INST = 'M',
-    DIV_INST = 'D'
+    DIV_INST = 'D',
+    NOP_INST = 'N'
 } instructionType;
 
 class Instruction {
@@ -26,7 +27,7 @@ public:
 
     Instruction(string instructionLine);
 
-    double execute();
+    double execute(bool verboseFlag);
 };
 
 class CPU: public Component {
@@ -47,7 +48,7 @@ public:
     ~CPU();
 
     // CPU should execute a program
-    double execute();
+    double execute(bool verboseFlag);
 
     int simulate(bool verboseFlag);
 
@@ -58,6 +59,8 @@ public:
     DataValue readReg();
 
     bool regIsEmpty();
+
+    void printReg();
 };
 
 #endif

@@ -12,7 +12,7 @@
 // Check if all components are created correctly from the configuration files
 TEST(platformTest, constructorTest)
 {
-    Platform myPlatform("data/platform.txt");
+    Platform myPlatform("data/platform.txt", 10);
 
     // Get first component - DRAM 1
     Memory *myMemoryP =  dynamic_cast<Memory*>(myPlatform.components[0]);
@@ -76,7 +76,7 @@ TEST(platformTest, constructorTest)
 // Check if all components are binded correctly
 TEST(platformTest, buildTest)
 {
-    Platform myPlatform("data/platform.txt");
+    Platform myPlatform("data/platform.txt", 10);
 
     myPlatform.build();
 
@@ -114,7 +114,7 @@ TEST(platformTest, buildTest)
 // Create platform - Simulate test
 TEST(platformTest, simulateTest)
 {
-    Platform myPlatform("data/platform.txt");
+    Platform myPlatform("data/platform.txt", 10);
 
     myPlatform.build();
 

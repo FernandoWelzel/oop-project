@@ -1,10 +1,12 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <sstream>
 
 #include "display.hpp"
 #include "parse.hpp"
 #include "component.hpp"
+#include "formating.hpp"
 
 using namespace std;
 
@@ -34,7 +36,11 @@ Display::Display(string displayPath){
             this->source = value;
         }
         else{
-            cerr << "ERROR: In file " << displayPath << " attribute " << description << " not implemented " << endl;
+            ostringstream errorString;
+
+            errorString << "In file " << displayPath << " attribute " << description << " not implemented ";
+
+            throw runtime_error(errorString.str());
         }
     }
 
