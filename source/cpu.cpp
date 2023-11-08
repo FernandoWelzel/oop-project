@@ -44,18 +44,12 @@ CPU::CPU(string cpuPath) {
             string instructionLine;
 
             while(getline(programFile, instructionLine)) {
-                // Creating new instuction
-                Instruction *newInstruction = new Instruction(instructionLine);
-
                 // Adding instruction to program
-                program.push_back(*newInstruction);
+                program.push_back(Instruction(instructionLine));
             }
 
-            // Creating nopInstruction to put on the end
-            Instruction *nopInstructionP = new Instruction(NOP_INST, 0, 0); 
-
             // Adding less NOP instruction to program
-            program.push_back(*nopInstructionP);
+            program.push_back(Instruction(NOP_INST, 0, 0));
 
             programCounter = program.begin();
 
@@ -75,6 +69,9 @@ CPU::CPU(string cpuPath) {
 
     // Close file
     cpuFile.close();
+}
+
+CPU::~CPU() {
 }
 
 // Prints register values in sequence

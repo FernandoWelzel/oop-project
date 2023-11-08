@@ -90,6 +90,9 @@ int main(int argc, char* argv[]) {
         ERROR("While simulating platform: " << e.what()); return 1;
     }
 
+    // Free platform
+    free(myPlatformP);
+
     // Returns zero in case of no errors    
     return 0;
 }
