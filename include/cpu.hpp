@@ -27,6 +27,8 @@ public:
 
     Instruction(string instructionLine);
 
+    Instruction(instructionType _type, double _operandA, double _operandB);
+    
     double execute(bool verboseFlag);
 };
 
@@ -34,6 +36,7 @@ class CPU: public Component {
 public:
     int cores;
     int frequency;
+    int activeCore;
     
     list<double> reg;
 

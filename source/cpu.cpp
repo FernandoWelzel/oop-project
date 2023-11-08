@@ -48,8 +48,14 @@ CPU::CPU(string cpuPath) {
                 Instruction *newInstruction = new Instruction(instructionLine);
 
                 // Adding instruction to program
-                program.push_back(*newInstruction); 
+                program.push_back(*newInstruction);
             }
+
+            // Creating nopInstruction to put on the end
+            Instruction *nopInstructionP = new Instruction(NOP_INST, 0, 0); 
+
+            // Adding less NOP instruction to program
+            program.push_back(*nopInstructionP);
 
             programCounter = program.begin();
 
@@ -63,6 +69,9 @@ CPU::CPU(string cpuPath) {
             throw runtime_error(errorString.str()); 
         }
     }
+
+    // Setting first active core
+    activeCore = 0;
 
     // Close file
     cpuFile.close();
@@ -83,13 +92,13 @@ int CPU::simulate(bool verboseFlag) {
     // Print verbose
     if(verboseFlag) {
         cout << "CPU simulated: " << label << endl;
-        
+        cout << "Active CORE: " << activeCore+1 << endl;
         printReg(); 
     }
 
     // Execute each instruction
     for(int i = 0; i < frequency; i++) {
-        writeReg(execute(verboseFlag));
+        execute(verboseFlag);
     }
 
     if(verboseFlag) {
@@ -106,11 +115,24 @@ DataValue CPU::read() {
 
 // Executes one instruction and increments program counter
 double CPU::execute(bool verboseFlag){
-    double result = programCounter->execute(verboseFlag);
+    double result = 0;   
 
-    // Update program counter if not in the end
-    if(programCounter < program.end()) {
+    if(programCounter < program.end() - 1) {
+        // Standart program execution
+        result = programCounter->execute(verboseFlag);
         ++programCounter;
+
+        writeReg(result);
+    } else if(activeCore < cores - 1) {
+        // Start processing with next core
+        programCounter = program.begin();
+        activeCore++;
+
+        // Process first instruction
+        result = programCounter->execute(verboseFlag);
+        ++programCounter;
+    
+        writeReg(result);
     }
 
     return result; 
@@ -143,6 +165,7 @@ bool CPU::regIsEmpty() {
     return reg.empty();
 }
 
+// Constructor from a given instruction line
 Instruction::Instruction(string instructionLine){
     // Find operation separation space
     size_t spacePos = instructionLine.find(' ', 4);
@@ -153,6 +176,12 @@ Instruction::Instruction(string instructionLine){
     operandA = stof(instructionLine.substr(4, spacePos));
     operandB = stof(instructionLine.substr(spacePos, instructionLine.back()));
 }
+
+// Default constructor
+Instruction::Instruction(instructionType _type, double _operandA, double _operandB) :
+    type(_type),
+    operandA(_operandA),
+    operandB(_operandB) {}
 
 double Instruction::execute(bool verboseFlag) {
     if(verboseFlag) {

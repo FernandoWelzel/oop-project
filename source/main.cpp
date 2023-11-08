@@ -37,12 +37,7 @@ int main(int argc, char* argv[]) {
                 break;
             
             case 's':
-                cout << "Argument " << optarg << endl;
-
                 simulationSteps = atoi(optarg);
-                
-                cout << "Simulation steps: " << simulationSteps << endl;
-
                 break;
 
             default:
