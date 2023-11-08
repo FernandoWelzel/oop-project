@@ -49,21 +49,47 @@ Bus::Bus(string busPath){
 Bus::~Bus(){}
 
 DataValue Bus::read(){
-    DataValue readData = (sourceP->read()); // creates variable
+    DataValue readData(0, false);
+
+    cout << "Bus was read" << endl;
+
     this->counter++;
-    if (!ready.empty()){                    // ready vector not empty
-        readData.value = ready[0];          // changing value
-        ready.erase(ready.begin());         // 
+
+    // Check ready vector not empty then return first
+    if (!ready.empty()){
+        // Getting value from ready - Setting validity
+        readData.value = ready[0];
+        readData.valid = true;
+
+        ready.erase(ready.begin()); 
+
         return readData;
     }
-    else{
-        return DataValue(0, false);
-    }
+    
+    return readData;
 }   
 
 int Bus::simulate(bool verboseFlag){ 
     if(verboseFlag) {
         cout << "Bus simulated: " << label << endl;
+    }
+
+    if(verboseFlag) {
+        cout << "Beginning of simulation BUS" << endl;
+
+        // Print ready
+        cout << "PENDING: ";
+        for(vector<double>::iterator it = pending.begin(); it != pending.end(); ++it) {
+            cout << *it <<  ", ";
+        }
+        cout << endl;
+
+        // Print ready
+        cout << "READY: ";
+        for(vector<double>::iterator it = ready.begin(); it != ready.end(); ++it) {
+            cout << *it <<  ", ";
+        }
+        cout << endl;
     }
     
     // Inserting pending into ready
@@ -75,7 +101,7 @@ int Bus::simulate(bool verboseFlag){
     // Initializing data
     DataValue readData(0, false);
 
-    for (int i = 0; i <= this->width; i++){
+    for (int i = 0; i < this->width; i++){
         cout << "SourceP is: " << sourceP->getLabel() << endl;
 
         readData = (sourceP->read());
@@ -88,11 +114,31 @@ int Bus::simulate(bool verboseFlag){
             }
         }
 
-        pending.insert(pending.end(), readData.value);
-        
-        if (!readData.valid){
+        if (readData.valid){
+            pending.insert(pending.end(), readData.value);
+        }
+        else {
             break;
         }
     }
+
+    if(verboseFlag) {
+        cout << "End of simulation BUS" << endl;
+
+        // Print ready
+        cout << "PENDING: ";
+        for(vector<double>::iterator it = pending.begin(); it != pending.end(); ++it) {
+            cout << *it <<  ", ";
+        }
+        cout << endl;
+
+        // Print ready
+        cout << "READY: ";
+        for(vector<double>::iterator it = ready.begin(); it != ready.end(); ++it) {
+            cout << *it <<  ", ";
+        }
+        cout << endl;
+    }
+
     return 0;
 };

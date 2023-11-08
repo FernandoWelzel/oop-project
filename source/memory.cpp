@@ -58,9 +58,14 @@ int Memory::simulate(bool verboseFlag) {
     // Print verbose
     if(verboseFlag) {
         cout << "Memory simulated: " << label << endl; 
+        cout << "Memory getting data from " << sourceP->getLabel() << endl;
     }
 
     if(accessCounter == accessTime - 1) {
+        if(verboseFlag) {
+            cout << "Access counter reached" << endl;
+        } 
+        
         // Getting value from source
         DataValue readData = sourceP->read();
 

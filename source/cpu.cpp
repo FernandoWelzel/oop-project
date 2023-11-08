@@ -99,20 +99,25 @@ double CPU::execute(){
 // Writes value to internal FIFO register
 void CPU::writeReg(double value){
     reg.push_back(value);
+
+    // Print register
+    cout << "REG: ";
+    for(list<double>::iterator it = reg.begin(); it != reg.end(); ++it) {
+        cout << *it <<  ", ";
+    }
+    cout << endl;
 }
 
 // Reads value from internal FIFO register
 DataValue CPU::readReg(){
-    bool valid = !regIsEmpty();
-
     // Quit loop if not valid
-    if(!valid) {
+    if(regIsEmpty()) {
         return DataValue(0, false);
     }
     
     double value = reg.front();
 
-    DataValue frontData = DataValue(value, valid);
+    DataValue frontData = DataValue(value, true);
 
     // Removes first element
     reg.pop_front();
@@ -122,7 +127,7 @@ DataValue CPU::readReg(){
 
 // Returns 1 is FIFO is empty
 bool CPU::regIsEmpty() {
-    return reg.empty();
+    return reg.size() == 0;
 }
 
 Instruction::Instruction(string instructionLine){

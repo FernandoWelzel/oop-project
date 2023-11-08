@@ -14,22 +14,23 @@ class Bus: public Component {
 public:
     int width;
     int counter = 0;
+
     vector<double> pending;
     vector<double> ready;
 
     string source;
 
     Component *sourceP;
- 
-
 
     // Constructor
     Bus(string busPath);
+
     // Destructor
     ~Bus();
 
     // Methods
     int simulate(bool verboseFlag);
+
     DataValue read();
 
 };
